@@ -1,0 +1,45 @@
+{
+    "name": "amber/benchmark",
+    "description": "Benchmark framework",
+    "type": "library",
+    "license": "GPL",
+    "authors": [
+        {
+            "name": "Deivi Pena",
+            "email": "systemson@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Amber\\Benchmark\\": "src/"
+        }
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/systemson/Container"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/systemson/Filesystem"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/systemson/Cache"
+        }
+    ],
+    "require": {
+        "symfony/console": "^3.4",
+        "amber/container": "dev-master",
+        "amber/cache": "dev-master",
+        "amber/filesystem": "dev-master"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.5"
+    },
+    "scripts": {
+        "test": "phpunit --coverage-html ./tmp/coverage/"
+    }
+}
