@@ -16,20 +16,6 @@
             "Amber\\Benchmark\\": "src/"
         }
     },
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/systemson/Container"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/systemson/Filesystem"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/systemson/Cache"
-        }
-    ],
     "require": {
         "symfony/console": "^3.4",
         "amber/container": "dev-master",
@@ -37,9 +23,11 @@
         "amber/filesystem": "dev-master"
     },
     "require-dev": {
+        "phpdocumentor/phpdocumentor": "^2.0",
         "phpunit/phpunit": "^6.5"
     },
     "scripts": {
-        "test": "phpunit --coverage-html ./tmp/coverage/"
+        "test": "phpunit --coverage-html ./tmp/coverage/",
+        "docs": "phpdoc -d ./src -i Tests/ -t ./tmp/docs/api"
     }
 }

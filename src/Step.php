@@ -6,14 +6,16 @@ class Step
 {
     public $callable = [];
 
+    public $name;
     public $start;
     public $end;
 
     public $total;
 
-    public function __construct(callable $callable)
+    public function __construct(callable $callable, $name)
     {
         $this->callable = $callable;
+        $this->name = $name;
     }
 
     public function start()

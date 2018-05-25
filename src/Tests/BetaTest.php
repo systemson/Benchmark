@@ -4,8 +4,10 @@ namespace Amber\Benchmark\Tests;
 
 use Amber\Benchmark\Benchmark;
 use Amber\Cache\Cache;
-use Amber\Cache\FileCache;
-use Amber\Cache\JsonCache;
+use Amber\Cache\Driver\SimpleCache;
+use Amber\Cache\Driver\JsonCache;
+use Amber\Cache\Driver\ApcuCache;
+use Amber\Cache\Driver\ArrayCache;
 use Amber\Container\Injector;
 
 class BetaTest extends Benchmark
@@ -15,23 +17,16 @@ class BetaTest extends Benchmark
     public function test()
     {
         return $this->step(function () {
-            $cache = new FileCache();
-            $cache->set('key', 'value');
-            $cache->get('key');
-            $cache->has('key');
-            $cache->delete('key');
-        })->step(function () {
+            $file = new SimpleCache();
+            $json = new JsonCache();
+            $array = new ArrayCache();
+            $apcu = new ApcuCache();
+        }, 'Instance Test')->step(function () {
             $container = new Injector();
-            $cache = $container->getInstanceOf(FileCache::class);
-            $cache->set('key', 'value');
-            $cache->get('key');
-            $cache->has('key');
-            $cache->delete('key');
-        })->step(function () {
-            Cache::set('key', 'value');
-            Cache::get('key');
-            Cache::has('key');
-            Cache::delete('key');
-        })->times(10000);
+
+            $container->bind(SimpleCache::class);
+
+            $file = $container->get(SimpleCache::class);
+        }, 'Container Test')->times(1);
     }
 }

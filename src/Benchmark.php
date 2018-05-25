@@ -7,9 +7,9 @@ class Benchmark
     public $steps = [];
     public $microtime;
 
-    public function step(callable $callable)
+    public function step(callable $callable, $name = null)
     {
-        $this->steps[] = new Step($callable);
+        $this->steps[] = new Step($callable, $name);
 
         return $this;
     }
@@ -22,13 +22,17 @@ class Benchmark
     public function run(array $steps, $times)
     {
         for ($x = 0; $x < count($steps); $x++) {
-            echo "Starting test for step {$x}:\r\n";
+            $name = $steps[$x]->name ?? $x.' step';
+
+            echo "\r\nStarting test for {$name}:\r\n";
             for ($y = 0; $y < $times; $y++) {
                 $steps[$x]->start();
                 $steps[$x]->callable();
                 $steps[$x]->end();
             }
-            echo "Total time for step {$x}: {$steps[$x]->total}\r\n";
+
+
+            echo "Total test time for {$name}: {$steps[$x]->total}\r\n";
         }
     }
 
