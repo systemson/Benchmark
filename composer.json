@@ -2,10 +2,10 @@
     "name": "amber/benchmark",
     "description": "Benchmark framework",
     "type": "library",
-    "license": "GPL",
+    "license": "GPL-3.0-or-later",
     "authors": [
         {
-            "name": "Deivi Pena",
+            "name": "Deivi Peña",
             "email": "systemson@gmail.com"
         }
     ],
@@ -15,19 +15,26 @@
         "psr-4": {
             "Amber\\Benchmark\\": "src/"
         }
+    },,
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "require": {
-        "symfony/console": "^3.4",
-        "amber/container": "dev-master",
-        "amber/cache": "dev-master",
-        "amber/filesystem": "dev-master"
+        "amber/common": "dev-master",
+        "lavoiesl/php-benchmark": "^1.4"
     },
     "require-dev": {
         "phpdocumentor/phpdocumentor": "^2.0",
-        "phpunit/phpunit": "^6.5"
+        "phpunit/phpunit": "^6.5|^7.0",
+        "squizlabs/php_codesniffer": "^3.3"
     },
     "scripts": {
-        "test": "phpunit --coverage-html ./tmp/coverage/",
-        "docs": "phpdoc -d ./src -i Tests/ -t ./tmp/docs/api"
+        "test": "phpunit --verbose --coverage-html ./tmp/coverage/",
+        "docs": "phpdoc -d ./src -i Tests/ -t ./tmp/docs/api",
+        "sniff": "phpcs --standard=PSR12 ./src",
+        "fix-cs": "phpcbf --standard=PSR12 ./src",
+        "speed": "php ./tests/Benchmark.php"
     }
 }
