@@ -15,7 +15,7 @@
         "psr-4": {
             "Amber\\Benchmark\\": "src/"
         }
-    },,
+    },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
@@ -30,11 +30,14 @@
         "phpunit/phpunit": "^6.5|^7.0",
         "squizlabs/php_codesniffer": "^3.3"
     },
+    "bin": [
+        "bin/benchmark"
+    ],
     "scripts": {
         "test": "phpunit --verbose --coverage-html ./tmp/coverage/",
         "docs": "phpdoc -d ./src -i Tests/ -t ./tmp/docs/api",
         "sniff": "phpcs --standard=PSR12 ./src",
         "fix-cs": "phpcbf --standard=PSR12 ./src",
-        "speed": "php ./tests/Benchmark.php"
+        "speed": "E:/Datos/TESTS/php/php.exe ./bin/benchmark"
     }
 }
